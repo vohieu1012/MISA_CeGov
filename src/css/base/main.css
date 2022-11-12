@@ -1,0 +1,21 @@
+@font-face {
+    font-family: hieuFont;
+    src: url("../../assets/Fonts/OpenSans-SemiBold.woff2");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: hieuFont;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    color: #000;
+    font-size: 14px;
+}
+.container {
+    width: 100%;
+    height: 100vh;
+}

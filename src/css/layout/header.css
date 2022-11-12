@@ -1,0 +1,63 @@
+.header {
+    width: 100%;
+    height: 56px;
+    background-color: #fff;
+    /* position: relative; */
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 8px;
+}
+.header .header--title {
+    height: 100%;
+}
+.header .header--title .header--title__icon {
+    display: flex;
+    align-items: center;
+}
+.header .header--title .header--title__icon .icon--launcher {
+    /* background-image: url("../../assets/svgimg/sprites.06b14dc5.svg"); */
+    margin-right: 16px;
+    margin-left: 4px;
+    height: 24px;
+    width: 24px;
+    background-repeat: no-repeat;
+    background: transparent url("../../assets/svgimg/sprites.06b14dc5.svg") no-repeat -192px 0;
+}
+.header .header--title .header--title__icon .icon--logo {
+    display: flex;
+    align-items: center;
+}
+.header .header--title .header--title__icon .icon--logo img {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+}
+.header .header--title .header--title__icon .icon--logo p {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.header .header--account {
+    height: 100%;
+    width: 198px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header .header--account .item--noti {
+    background-position: -24px -48px;
+}
+.header .header--account .item--mark {
+    background-position: -48px -48px;
+}
+.header .header--account .item--book {
+    background: transparent url("../../assets/svgimg/ic_document_help.5a303db8.svg") no-repeat;
+}
+.header .header--account .item--setting {
+    background-position: -264px -168px;
+}
+
+.header .header--account .item--user img {
+    width: 32px;
+    height: 32px;
+}

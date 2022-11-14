@@ -34,7 +34,14 @@
             @dblclick="logData(item)"
           >
             <td>
-              <div><input class="select--value" type="checkbox" /></div>
+              <div class="clickSelect">
+                <input
+                  class="select--value"
+                  @click="selectValue(item)"
+                  type="checkbox"
+    
+                />
+              </div>
             </td>
             <td>{{ item.competitionTitle }}</td>
             <td>{{ item.codeTitle }}</td>
@@ -68,6 +75,7 @@ export default {
     return {
       listValue: {},
       rowValue: [],
+      listSelect: [],
     };
   },
   created() {
@@ -171,10 +179,14 @@ export default {
     ];
   },
   mounted() {
-    this.changeBackground(), this.scrollTable();
+    this.changeBackground(), this.scrollTable(), this.selectValue();
     /* eslint-env jquery */
   },
   methods: {
+    /**
+     * Author :VxHieu
+     * 13/11/2022
+     */
     //   Thay đổi màu background của hàng khi click chuột
     //  Thay đổi màu click xung quanh thành màu trắng
 
@@ -219,6 +231,32 @@ export default {
     logData(item) {
       try {
         this.$emit("valueReward", item);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    /**
+     * Author :VxHieu
+     * 14/11/2022
+     */
+
+    // trả dữ liệu của hàng khi click chuột vào checkbox
+    selectValue(item) {
+      try {
+        if (item) {
+          if (this.listSelect.length == 0) {
+            this.listSelect.push(item);
+            console.log(this.listSelect.length);
+          } else if (jQuery.inArray(item, this.listSelect) == -1) {
+            this.listSelect.push(item);
+          } else {
+            this.listSelect.pop(item);
+            console.log(this.listSelect.length);
+          }
+        }
+
+        console.log(this.listSelect);
+        this.$emit("valueSelect", this.listSelect);
       } catch (error) {
         console.log(error);
       }

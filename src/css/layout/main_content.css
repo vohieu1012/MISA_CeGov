@@ -1,3 +1,7 @@
+@font-face {
+    font-family: Regular;
+    src: url("../../assets/Fonts/GoogleSans-Regular.77b210bc.woff2");
+}
 .maincontent {
     width: calc(100% - 204px);
     height: 100%;
@@ -27,22 +31,116 @@
 }
 .maincontent .maincontent--toolbar .maincontent--toolbar__left input {
     width: 265px;
+    font-family: Regular;
 }
 .maincontent .maincontent--toolbar .maincontent--toolbar__left .search--icon {
     background-position: -289px -24px;
     position: absolute;
     right: 12px;
+    z-index: 1;
+}
+.maincontent .maincontent--toolbar .maincontent--toolbar__left .clearText {
+    background-position: -242px -26px;
+    position: absolute;
+    right: 36px;
+    top: 7px;
+    z-index: 1;
+}
+.maincontent .maincontent--toolbar .wrap--toolbar {
+    display: flex;
+}
+.maincontent .maincontent--toolbar .maincontent--toolbar__center {
+    position: relative;
+}
+.maincontent .maincontent--toolbar .maincontent--toolbar__center .center--filter {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.maincontent .maincontent--toolbar .maincontent--toolbar__center .center--filter .center--filter__name {
+    font-family: Regular;
+    margin-left: 8px;
+}
+.maincontent .maincontent--toolbar .maincontent--toolbar__center .center--filter .center--filter__icon {
+    background-position: -96px -48px;
+    display: inline-block;
 }
 .maincontent .maincontent--toolbar .maincontent--toolbar__right .right--add .add--icon {
     background-position: -192px -96px;
-    display: inline-block;
     margin-right: 8px;
 }
 .maincontent .maincontent--toolbar .maincontent--toolbar__right .right--add button {
     display: flex;
     align-items: center;
+    font-family: Regular;
+}
+.maincontent .maincontent--toolbar .maincontent--toolbar__right .right--click label,
+a,
+button {
+    font-family: Regular;
 }
 .maincontent .maincontent--toolbar .maincontent--toolbar__right .right--click a:hover {
     cursor: pointer;
     text-decoration: underline;
 }
+/* form filter */
+.center--form__triangle {
+    right: 0;
+    position: absolute;
+    top: -8px;
+    z-index: 7;
+}
+.center--form {
+    position: absolute;
+    background-color: #fff;
+    width: 360px;
+    right: 5px;
+    z-index: 7;
+    top: 50px;
+    box-shadow: 0 0 16px rgb(23 27 42 / 24%);
+    border-radius: 4px;
+}
+.center--form .center--form__reward .reward--title {
+    display: flex;
+    align-items: center;
+    margin: 12px 24px 24px 24px;
+    justify-content: space-between;
+}
+.center--form .center--form__reward .reward--title .reward--title__name {
+    font-size: 18px;
+}
+.center--form .center--form__reward .reward--title .reward--title__close {
+    background-position: -242px -26px;
+}
+.center--form .center--form__reward .reward--data {
+    margin: 0 24px;
+}
+.center--form .center--form__reward .reward--data .reward--data__block label {
+    display: block;
+    margin-bottom: 12px;
+    font-family: Regular;
+}
+.center--form .center--form__reward .reward--data .reward--data__block select {
+    width: 100%;
+    height: 36px;
+    margin-bottom: 12px;
+    font-family: Regular;
+}
+.center--form .center--form__reward .reward--space {
+    width: 100%;
+    height: 1px;
+    background-color: #cdd3d6;
+    margin-top: 12px;
+}
+.center--form .center--form__reward .reward--nav {
+    float: right;
+    background-color: #fbfbfe;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.center--form .center--form__reward .reward--nav .reward--nav__button {
+    margin: 12px 24px;
+}
+
+/* end form filter */

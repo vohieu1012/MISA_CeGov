@@ -1,3 +1,7 @@
+@font-face {
+    font-family: Regular;
+    src: url("../../assets/Fonts/GoogleSans-Regular.77b210bc.woff2");
+}
 .tableData {
     background-color: #fff;
     width: 100%;
@@ -55,7 +59,8 @@ th {
 table,
 td {
     padding-left: 16px;
-    font-weight: 900;
+    font-family: Regular;
+    font-weight: 400;
 }
 thead tr > th {
     position: sticky;
@@ -84,7 +89,7 @@ tbody tr > :first-child {
     background-color: #ffff;
     left: 0;
 }
-table tbody tr  {
+table tbody tr {
     white-space: nowrap;
     width: 50px;
     overflow: hidden;
@@ -139,4 +144,7 @@ th {
     border-bottom-right-radius: 8px;
     display: flex;
     align-items: center;
+}
+.tableData .tableData--paging .tableData--paging__left {
+    font-family: Regular;
 }

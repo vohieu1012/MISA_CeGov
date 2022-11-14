@@ -9,8 +9,14 @@
           Sửa danh hiệu thi đua
         </div>
         <div class="wrapFrom--title__option">
-          <div class="option--mark bg"></div>
-          <div class="option--close bg" @click="this.$emit('closeForm')"></div>
+          <div class="option--mark bg">
+            <span class="tooltip">Hướng dẫn</span>
+            <span class="triangle"></span>
+          </div>
+          <div class="option--close bg" @click="this.$emit('closeForm')">
+            <span class="tooltip">Đóng </span>
+            <span class="triangle"></span>
+          </div>
         </div>
       </div>
 
@@ -169,7 +175,7 @@
       <div class="wrapForm--space"></div>
       <div class="wrapForm--nav">
         <div class="close">
-          <button class="btn">Huỷ</button>
+          <button class="btn" @click="this.$emit('closeForm')">Huỷ</button>
         </div>
         <div class="double--select" v-if="!isStatus">
           <button class="btn primary-outline">Lưu & thêm mới</button>

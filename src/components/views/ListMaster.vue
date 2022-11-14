@@ -4,8 +4,11 @@
     <div class="wrap">
       <TheSidebar></TheSidebar>
       <div class="maincontent">
-        <TheMain @onAddClick="changeIsShow"></TheMain>
-        <ListEmulation @valueReward="valueShow"></ListEmulation>
+        <TheMain @onAddClick="changeIsShow" :value="this.valueEdit"></TheMain>
+        <ListEmulation
+          @valueReward="valueShow"
+          @valueSelect="logSelect"
+        ></ListEmulation>
       </div>
     </div>
     <FormAdd
@@ -40,6 +43,7 @@ export default {
     return {
       isShow: false,
       valueForm: [],
+      valueEdit: [],
     };
   },
   beforeCreate() {
@@ -79,7 +83,15 @@ export default {
     valueShow(item) {
       this.isShow = true;
       this.valueForm = item;
-      console.log(this.valueForm);
+    },
+
+    /**
+     * vxhieu 18/7/2022
+     * xử lý select cột
+     */
+    logSelect(item) {
+      this.valueEdit = item;
+      console.log("ListMaster:" + this.valueEdit);
     },
   },
   /* eslint-env jquery */

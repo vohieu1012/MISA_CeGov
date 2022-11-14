@@ -25,7 +25,9 @@
     height: 36px;
     padding: 0 12px;
 }
-
+.primary:hover {
+    background: #1a73e8;
+}
 .primary-outline {
     color: #2979ff;
     border: 1px solid #2979ff;

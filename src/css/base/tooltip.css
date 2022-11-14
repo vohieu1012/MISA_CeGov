@@ -1,0 +1,24 @@
+@font-face {
+    font-family: Medium;
+    src: url("../../assets/Fonts/GoogleSans-Medium.ebe648aa.woff2");
+}
+.tooltip {
+    position: absolute;
+    top: -55px;
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    right: -39px;
+    display: block;
+    width: 110px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-align: center;
+    font-family: Regular;
+}
+.tooltip:hover {
+    visibility: visible;
+}
+.tooltip .rectangle {
+    background-color: blue;
+}

@@ -1,0 +1,18 @@
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 10px solid black;
+    position: absolute;
+    right: 7px;
+    top: -22px;
+    visibility: hidden;
+}
+.triangle--up {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 10px solid #fff;
+}

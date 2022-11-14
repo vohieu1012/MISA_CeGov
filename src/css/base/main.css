@@ -1,3 +1,13 @@
+@import url("../../css/base/sticky.css");
+@import url("../../css/base/select--value.css");
+@import url("../../css/base/input.css");
+@import url("../../css/base/checkbox.css");
+@import url("../../css/base/button.css");
+@import url("../../css/base/sticky.css");
+@import url("../../css/base/scrollbar.css");
+@import url("../../css/base/loader.css");
+@import url("../../css/base/select.css");
+@import url("../../css/base/bg.css");
 @font-face {
     font-family: hieuFont;
     src: url("../../assets/Fonts/OpenSans-SemiBold.woff2");

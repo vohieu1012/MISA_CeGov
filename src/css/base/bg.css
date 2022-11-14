@@ -3,5 +3,8 @@
     height: 24px;
     width: 24px;
     background-repeat: no-repeat;
-    margin: 8px 0px;
+    /* margin: 8px 0px; */
+}
+.bg:hover {
+    cursor: pointer;
 }

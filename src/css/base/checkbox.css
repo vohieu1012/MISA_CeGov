@@ -1,0 +1,7 @@
+.checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1px solid;
+    margin-right: 12px;
+    cursor: pointer;
+}

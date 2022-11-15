@@ -39,7 +39,6 @@
                   class="select--value"
                   @click="selectValue(item)"
                   type="checkbox"
-    
                 />
               </div>
             </td>
@@ -246,16 +245,12 @@ export default {
         if (item) {
           if (this.listSelect.length == 0) {
             this.listSelect.push(item);
-            console.log(this.listSelect.length);
           } else if (jQuery.inArray(item, this.listSelect) == -1) {
             this.listSelect.push(item);
           } else {
             this.listSelect.pop(item);
-            console.log(this.listSelect.length);
           }
         }
-
-        console.log(this.listSelect);
         this.$emit("valueSelect", this.listSelect);
       } catch (error) {
         console.log(error);

@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Regular;
+    src: url("../../assets/Fonts/GoogleSans-Regular.77b210bc.woff2");
+}
+.error {
+    font-family: Regular;
+    color: #ef5350;
+    margin-top: 6px;
+    display: block;
+}
+.errors {
+    height: 6px;
+    margin-bottom: 18px;
+}

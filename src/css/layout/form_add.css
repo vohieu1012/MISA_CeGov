@@ -66,6 +66,9 @@
 .wrapForm--data {
     margin: 20px 0;
 }
+.wrapForm--data .top--input {
+    position: relative;
+}
 .wrapForm--data .top--input input {
     height: 36px;
     width: 100%;
@@ -82,21 +85,22 @@
     display: flex;
     /* align-items: center; */
     flex: 1;
-    margin-top: 24px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 .wrapForm--data .wrapForm--data__main .main--left {
     width: 50%;
     padding-right: 12px;
 }
+
 .wrapForm--data .wrapForm--data__main .main--left .main--left__label {
     margin-bottom: 12px;
+    position: relative;
 }
 .wrapForm--data .wrapForm--data__main .main--left .main--left__label label {
     font-family: Regular;
 }
-.wrapForm--data .wrapForm--data__main .main--left .main--left__input {
-    margin-bottom: 16px;
-}
+
 .wrapForm--data .wrapForm--data__main .main--left .main--left__input select,
 input {
     font-family: Regular;
@@ -113,7 +117,7 @@ input {
 .wrapForm--data .wrapForm--data__main .main--right .main--right__select {
     display: flex;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 .wrapForm--data .wrapForm--data__main .main--right .main--right__select .select--left {
@@ -186,3 +190,26 @@ input {
     justify-content: end;
     margin-top: 12px;
 }
+/* 
+icon clear text input
+
+*/
+
+.clearInput {
+    background: transparent url(http://localhost:8080/img/sprites.06b14dc5.00119d4c.svg);
+    background-position: -242px -26px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.clearCode {
+    background: transparent url(http://localhost:8080/img/sprites.06b14dc5.00119d4c.svg);
+    background-position: -242px -26px;
+    position: absolute;
+    top: 35px;
+    right: 5px;
+}
+/* 
+icon clear text input
+
+*/

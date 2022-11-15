@@ -7,3 +7,6 @@
     font-size: 14px;
     padding-right: 12px;
 }
+.select option {
+    background-color: #fff;
+}

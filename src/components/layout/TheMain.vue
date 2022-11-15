@@ -113,6 +113,7 @@ export default {
       valueRow: this.value,
       textSearch: "",
       isClear: false,
+
     };
   },
   created() {
@@ -130,7 +131,6 @@ export default {
     },
     valueRow(newValue) {
       this.valueRow = newValue;
-      console.log("valueRow" + this.valueRow);
     },
   },
   methods: {
@@ -141,7 +141,6 @@ export default {
     changeAdd() {
       try {
         this.valueRow = this.value;
-        console.log("row:" + this.valueRow);
         if (!this.valueRow) {
           this.isShow = true;
           console.log(this.isShow);

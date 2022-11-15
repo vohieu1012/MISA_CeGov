@@ -46,27 +46,7 @@ export default {
       valueEdit: [],
     };
   },
-  beforeCreate() {
-    console.log(this.isShow);
-  },
-  created() {
-    console.log(this.isShow);
-  },
-  beforeMount() {
-    console.log(this.isShow);
-  },
-  mounted() {
-    console.log(this.isShow);
-  },
-  beforeUpdate() {
-    console.log(this.isShow);
-  },
-  updated() {
-    console.log(this.isShow);
-  },
-  unmounted() {
-    // console.log(this.isShow);
-  },
+
   methods: {
     // click button hiển thị form thêm
 
@@ -86,12 +66,11 @@ export default {
     },
 
     /**
-     * vxhieu 18/7/2022
-     * xử lý select cột
+     * vxhieu 15/11/2022
+     * 
      */
     logSelect(item) {
       this.valueEdit = item;
-      console.log("ListMaster:" + this.valueEdit);
     },
   },
   /* eslint-env jquery */

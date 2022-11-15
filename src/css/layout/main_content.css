@@ -88,14 +88,14 @@ button {
     right: 0;
     position: absolute;
     top: -8px;
-    z-index: 7;
+    z-index: 10;
 }
 .center--form {
     position: absolute;
     background-color: #fff;
     width: 360px;
     right: 5px;
-    z-index: 7;
+    z-index: 10;
     top: 50px;
     box-shadow: 0 0 16px rgb(23 27 42 / 24%);
     border-radius: 4px;

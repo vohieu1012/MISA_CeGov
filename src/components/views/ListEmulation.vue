@@ -44,9 +44,25 @@
             </td>
             <td>{{ item.competitionTitle }}</td>
             <td>{{ item.codeTitle }}</td>
-            <td>{{ item.objectReward }}</td>
+            <td>
+              {{
+                item.objectReward == 2
+                  ? "Tập thể;Cá Nhân"
+                  : item.objectReward == 1
+                  ? "Cá Nhân"
+                  : "Tập thể"
+              }}
+            </td>
             <td>{{ item.levelReward }}</td>
-            <td>{{ item.typeMovement }}</td>
+            <td>
+              {{
+                item.typeMovement == 2
+                  ? "Thường xuyên;Theo đợt"
+                  : item.levelReward == 1
+                  ? "Thường xuyên"
+                  : "Theo đợt"
+              }}
+            </td>
             <td>
               {{ item.status }}
             </td>
@@ -66,7 +82,9 @@
 </template>
 <script>
 import $ from "jquery";
-import axios from "axios";
+
+//  Tập thể:0 Cá nhân:1 Tập thể và cá nhân 2
+//  Theo đợt 0 Thường xuyên 1; Thường xuyên và theo đợt
 
 export default {
   props: [],
@@ -82,97 +100,97 @@ export default {
       {
         competitionTitle: "Lao động tiên tiến",
         codeTitle: "LĐTTCH",
-        objectReward: "Cá nhân",
+        objectReward: 1,
         levelReward: "Cấp huyện tương đương",
-        typeMovement: "Thường xuyên",
+        typeMovement: 0,
         status: "Sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
         codeTitle: "CSTDCT",
-        objectReward: "Tập thể",
+        objectReward: 0,
         levelReward: "Cấp tỉnh tương đương",
-        typeMovement: "Theo đợt",
+        typeMovement: 1,
         status: "Sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua toàn quốc",
         codeTitle: "CSTDTQ",
-        objectReward: "Cá nhân",
+        objectReward: 1,
         levelReward: "Cấp nhà nước",
-        typeMovement: "Thường xuyên;Theo đợt",
+        typeMovement: 2,
         status: "Ngừng sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
         codeTitle: "CSTDCT",
-        objectReward: "Tập thể",
+        objectReward: 2,
         levelReward: "Cấp tỉnh tương đương",
-        typeMovement: "Theo đợt",
+        typeMovement: 1,
         status: "Sử dụng",
       },
       {
         competitionTitle: "Lao động tiên tiến",
         codeTitle: "LĐTTCH",
-        objectReward: "Cá nhân",
+        objectReward: 1,
         levelReward: "Cấp huyện tương đương",
-        typeMovement: "Thường xuyên",
+        typeMovement: 0,
         status: "Sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
         codeTitle: "CSTDCT",
-        objectReward: "Tập thể",
+        objectReward: 2,
         levelReward: "Cấp tỉnh tương đương",
-        typeMovement: "Theo đợt",
+        typeMovement: 1,
         status: "Sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua toàn quốc",
         codeTitle: "CSTDTQ",
-        objectReward: "Cá nhân",
+        objectReward: 1,
         levelReward: "Cấp nhà nước",
-        typeMovement: "Thường xuyên;Theo đợt",
+        typeMovement: 2,
         status: "Ngừng sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
         codeTitle: "CSTDCT",
-        objectReward: "Tập thể",
+        objectReward: 2,
         levelReward: "Cấp tỉnh tương đương",
-        typeMovement: "Theo đợt",
+        typeMovement: 0,
         status: "Sử dụng",
       },
       {
         competitionTitle: "Lao động tiên tiến",
         codeTitle: "LĐTTCH",
-        objectReward: "Cá nhân",
+        objectReward: 0,
         levelReward: "Cấp huyện tương đương",
-        typeMovement: "Thường xuyên",
+        typeMovement: 1,
         status: "Sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
         codeTitle: "CSTDCT",
-        objectReward: "Tập thể",
+        objectReward: 0,
         levelReward: "Cấp tỉnh tương đương",
-        typeMovement: "Theo đợt",
+        typeMovement: 1,
         status: "Sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua toàn quốc",
         codeTitle: "CSTDTQ",
-        objectReward: "Cá nhân",
+        objectReward: 0,
         levelReward: "Cấp nhà nước",
-        typeMovement: "Thường xuyên;Theo đợt",
+        typeMovement: 2,
         status: "Ngừng sử dụng",
       },
       {
         competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
         codeTitle: "CSTDCT",
-        objectReward: "Tập thể",
+        objectReward: 1,
         levelReward: "Cấp tỉnh tương đương",
-        typeMovement: "Theo đợt",
+        typeMovement: 1,
         status: "Sử dụng",
       },
     ];
@@ -223,9 +241,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-    getData() {
-      axios.get();
     },
     logData(item) {
       try {

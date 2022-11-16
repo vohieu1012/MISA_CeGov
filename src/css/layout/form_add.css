@@ -195,19 +195,17 @@ icon clear text input
 
 */
 
-.clearInput {
-    background: transparent url(http://localhost:8080/img/sprites.06b14dc5.00119d4c.svg);
+.wrapForm--data .top--input .clearInput {
     background-position: -242px -26px;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 7px;
+    right: 7px;
 }
-.clearCode {
-    background: transparent url(http://localhost:8080/img/sprites.06b14dc5.00119d4c.svg);
+.wrapForm--data .wrapForm--data__main .main--left .main--left__label .clearCode {
     background-position: -242px -26px;
     position: absolute;
-    top: 35px;
-    right: 5px;
+    top: 37px;
+    right: 7px;
 }
 /* 
 icon clear text input

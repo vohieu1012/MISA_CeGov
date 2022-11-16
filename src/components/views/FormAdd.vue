@@ -14,7 +14,7 @@
             <span class="triangle"></span>
           </div>
           <div class="option--close bg" @click="this.$emit('closeForm')">
-            <span class="tooltip">Đóng </span>
+            <span class="tooltip">Đóng</span>
             <span class="triangle"></span>
           </div>
         </div>
@@ -33,6 +33,7 @@
             <div class="top--input">
               <input
                 class="input"
+                :class="{ errorborder: isBorder }"
                 type="text"
                 v-model="dataInput.name"
                 :disabled="isStatus"
@@ -70,6 +71,7 @@
                   class="input"
                   v-model="dataInput.code"
                   :disabled="isStatus"
+                  :class="{ errorborder: isActive }"
                   @blur="checkValidateCode"
                   type="text"
                 />
@@ -106,7 +108,9 @@
                     class="checkbox"
                     type="checkbox"
                     :checked="
-                      dataInput.reward == 'Cá nhân' || this.isStatus == false
+                      dataInput.reward == 1 ||
+                      this.isStatus == false ||
+                      dataInput.reward == 2
                     "
                     :disabled="isStatus"
                   />
@@ -116,7 +120,7 @@
                   <input
                     class="checkbox"
                     type="checkbox"
-                    :checked="dataInput.reward == 'Tập thể'"
+                    :checked="dataInput.reward == 0 || dataInput.reward == 2"
                     :disabled="isStatus"
                   />
                   <label for="">Tập thể</label>
@@ -137,8 +141,8 @@
                     type="checkbox"
                     :disabled="isStatus"
                     :checked="
-                      dataInput.movement == 'Thường xuyên' ||
-                      dataInput.movement == 'Thường xuyên;Theo đợt' ||
+                      dataInput.movement == 0 ||
+                      dataInput.movement == 2 ||
                       this.isStatus == false
                     "
                   />
@@ -150,8 +154,7 @@
                     type="checkbox"
                     :disabled="isStatus"
                     :checked="
-                      dataInput.movement == 'Theo đợt' ||
-                      dataInput.movement == 'Thường xuyên;Theo đợt'
+                      dataInput.movement == 1 || dataInput.movement == 2
                     "
                   />
                   <label for="">Theo đợt</label>
@@ -231,19 +234,16 @@ export default {
       errName: [],
       errCode: [],
       isActive: false,
+      isBorder: true,
     };
   },
   created() {
-    this.formList();
     this.changeAtr();
   },
   mounted() {
     this.$nextTick(() => this.$refs.input.focus());
   },
   methods: {
-    formList() {
-      console.log(this.data);
-    },
     changeAtr() {
       if (this.data) {
         this.isStatus = true;
@@ -255,10 +255,11 @@ export default {
       try {
         if (!this.dataInput.name) {
           this.errName.push("Tên danh hiệu thi đua không được để trống.");
+          this.isBorder = true;
         } else if (this.dataInput.name) {
           this.errName.pop();
+          this.isBorder = false;
         }
-        console.log(this.errName);
       } catch (error) {
         console.log(error);
       }
@@ -279,10 +280,12 @@ export default {
      */
     // clear text danh hiệy thi đua
     clearText() {
+      this.errName.push("Tên danh hiệu thi đua không được để trống.");
       this.dataInput.name = "";
     },
     // clear text mã danh hiệu
     clearCode() {
+      this.errCode.push("Mã danh hiệu không được để trống.");
       this.dataInput.code = "";
     },
   },

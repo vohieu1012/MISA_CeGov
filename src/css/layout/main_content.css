@@ -33,6 +33,13 @@
     width: 265px;
     font-family: Regular;
 }
+.maincontent .maincontent--toolbar .maincontent--toolbar__left input:hover {
+    outline: none;
+    border: 1px solid #1a73e8;
+}
+.maincontent .maincontent--toolbar .maincontent--toolbar__left input:focus-visible {
+    outline: none;
+}
 .maincontent .maincontent--toolbar .maincontent--toolbar__left .search--icon {
     background-position: -289px -24px;
     position: absolute;

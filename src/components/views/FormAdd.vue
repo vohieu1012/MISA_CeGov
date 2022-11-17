@@ -88,10 +88,30 @@
               </div>
               <div class="main--left__input">
                 <select name="" id="" class="select" :disabled="isStatus">
-                  <option value="">Cấp Nhà nước</option>
-                  <option value="">Cấp Tỉnh/tương đương</option>
-                  <option value="">Cấp Huyện/tương đương</option>
-                  <option value="">Cấp Xã/tương đương</option>
+                  <option
+                    :selected="this.data.levelReward == 'Cấp nhà nước'"
+                    value=""
+                  >
+                    Cấp Nhà nước
+                  </option>
+                  <option
+                    :selected="this.data.levelReward == 'Cấp tỉnh tương đương'"
+                    value=""
+                  >
+                    Cấp Tỉnh/tương đương
+                  </option>
+                  <option
+                    :selected="this.data.levelReward == 'Cấp huyện'"
+                    value=""
+                  >
+                    Cấp Huyện/tương đương
+                  </option>
+                  <option
+                    :selected="this.data.levelReward == 'Cấp xã tương đương'"
+                    value=""
+                  >
+                    Cấp Xã/tương đương
+                  </option>
                 </select>
               </div>
             </div>
@@ -234,7 +254,7 @@ export default {
       errName: [],
       errCode: [],
       isActive: false,
-      isBorder: true,
+      isBorder: false,
     };
   },
   created() {
@@ -253,9 +273,11 @@ export default {
     // validate tên danh hiệu thi đua
     checkValidate() {
       try {
+   
         if (!this.dataInput.name) {
           this.errName.push("Tên danh hiệu thi đua không được để trống.");
           this.isBorder = true;
+          console.log(1);
         } else if (this.dataInput.name) {
           this.errName.pop();
           this.isBorder = false;
@@ -286,6 +308,7 @@ export default {
     // clear text mã danh hiệu
     clearCode() {
       this.errCode.push("Mã danh hiệu không được để trống.");
+      this.isActive = true;
       this.dataInput.code = "";
     },
   },

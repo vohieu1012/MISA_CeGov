@@ -75,6 +75,15 @@
     padding: 9px 12px;
     font-family: Regular;
 }
+.wrapForm--data .top--input input:hover {
+    outline: none;
+    border: 1px solid #1a73e8;
+}
+.wrapForm--data .top--input input:focus-visible {
+    /* outline: none; */
+    border: 1px solid #1a73e8;
+    outline: none;
+}
 .wrapForm--data .top--item {
     margin-bottom: 12px;
 }
@@ -86,7 +95,6 @@
     /* align-items: center; */
     flex: 1;
     margin-top: 16px;
-    margin-bottom: 16px;
 }
 .wrapForm--data .wrapForm--data__main .main--left {
     width: 50%;
@@ -104,6 +112,12 @@
 .wrapForm--data .wrapForm--data__main .main--left .main--left__input select,
 input {
     font-family: Regular;
+}
+.wrapForm--data .wrapForm--data__main .main--left .main--left__input input:hover {
+    border: 1px solid #1a73e8;
+}
+.wrapForm--data .wrapForm--data__main .main--left .main--left__input input:focus-visible {
+    outline: none;
 }
 .wrapForm--data .wrapForm--data__main .main--left .main--left__input select option {
     width: 10px;
@@ -152,7 +166,6 @@ input {
     padding: 6px 12px;
     resize: none;
     border: 1px solid #e0e1ef;
-    margin-top: 12px;
     font-family: Regular;
     border-radius: 4px;
 }

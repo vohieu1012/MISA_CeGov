@@ -8,7 +8,7 @@ import ListMaster from "../src/components/views/ListMaster.vue";
 export default {
   name: "App",
   components: {
-    ListMaster,
+    ListMaster
   },
 };
 </script>

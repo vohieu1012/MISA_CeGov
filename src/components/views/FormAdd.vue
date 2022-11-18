@@ -273,7 +273,7 @@ export default {
     // validate tên danh hiệu thi đua
     checkValidate() {
       try {
-   
+        console.log(this.dataInput.name);
         if (!this.dataInput.name) {
           this.errName.push("Tên danh hiệu thi đua không được để trống.");
           this.isBorder = true;

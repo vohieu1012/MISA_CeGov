@@ -234,6 +234,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   props: {
@@ -271,14 +272,19 @@ export default {
     },
     // validate form thêm danh hiệu thi đua
     // validate tên danh hiệu thi đua
+    /**
+     * Author : VxHieu
+     *18/11/2022
+     */
+    // validate tên danh hiệu thi đua
+    // Dùng trim để bắt validate nhập tên là khoảng trắng
     checkValidate() {
       try {
-        console.log(this.dataInput.name);
-        if (!this.dataInput.name) {
+        console.log(this.errName);
+        if (!this.dataInput.name.trim()) {
           this.errName.push("Tên danh hiệu thi đua không được để trống.");
           this.isBorder = true;
-          console.log(1);
-        } else if (this.dataInput.name) {
+        } else {
           this.errName.pop();
           this.isBorder = false;
         }
@@ -288,10 +294,10 @@ export default {
     },
     // validate mã danh hiệu
     checkValidateCode() {
-      if (!this.dataInput.code) {
+      if (!this.dataInput.code.trim()) {
         this.errCode.push("Mã danh hiệu không được để trống.");
         this.isActive = true;
-      } else if (this.dataInput.code) {
+      } else {
         this.errCode.pop();
         this.isActive = false;
       }
@@ -300,7 +306,7 @@ export default {
      * Author : VxHieu
      *15/11/2022
      */
-    // clear text danh hiệy thi đua
+    // clear text danh hiệu thi đua
     clearText() {
       this.errName.push("Tên danh hiệu thi đua không được để trống.");
       this.dataInput.name = "";

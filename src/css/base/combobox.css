@@ -1,0 +1,90 @@
+@font-face {
+  font-family: Regular;
+  src: url("../../assets/Fonts/GoogleSans-Regular.77b210bc.woff2");
+}
+span.msg,
+span.choose {
+  color: #555;
+  padding: 5px 0 10px;
+  display: inherit;
+}
+
+/*Styling Selectbox*/
+.dropdown {
+  width: 100%;
+  display: inline-block;
+  background-color: #fff;
+  transition: all 0.5s ease;
+  position: relative;
+  font-size: 14px;
+  color: #474747;
+  height: 100%;
+  text-align: left;
+  border-radius: 4px;
+}
+.dropdown .select {
+  cursor: pointer;
+  display: block;
+  display: flex;
+  align-items: center;
+  font-family: Regular;
+}
+.dropdown .icon--down {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.dropdown .select > i {
+  font-size: 13px;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  float: right;
+ 
+}
+
+.dropdown.active .select > i {
+  transform: rotate(-90deg);
+}
+.dropdown .dropdown-menu {
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  left: 0;
+  box-shadow: 0 0 16px rgb(23 27 42 / 24%);
+  overflow: hidden;
+  display: none;
+  overflow-y: auto;
+  margin-top: 2px;
+  border-radius: 4px;
+}
+.dropdown .dropdown-menu li {
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  margin: 0px 12px;
+  border-radius: 4px;
+  position: relative;
+}
+.dropdown .dropdown-menu li .icon-checked{
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background-position: -192px -24px;
+}
+.dropdown .dropdown-menu li:first-child{
+    margin-top: 12px;
+}
+.dropdown .dropdown-menu li:last-child{
+    margin-bottom: 12px;
+}
+.dropdown .dropdown-menu {
+  padding: 0;
+  list-style: none;
+}
+.dropdown .dropdown-menu li:hover {
+  background-color: #e0ebff;
+}
+.dropdown .dropdown-menu li:active {
+  background-color: #e2e2e2;
+}

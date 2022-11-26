@@ -62,6 +62,82 @@ td {
     font-family: Regular;
     font-weight: 400;
 }
+thead tr {
+    position: relative;
+}
+
+table tbody tr .manageOption {
+    position: absolute;
+    right: 24px;
+    height: 46px;
+    display: none;
+}
+table tbody tr:hover .manageOption{
+    display: block  ;
+}
+table tbody tr .manageOption .manageOption--select{
+display: flex;
+align-items: center;
+height: 100%;
+
+}
+table tbody tr .manageOption .manageOption--select .manageOption--select__edit {
+    width: 36px;
+    height: 36px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #e0e1ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+table tbody tr .manageOption .manageOption--select .manageOption--select__edit .icon{
+    background-position: 0 -72px;
+}
+table tbody tr .manageOption .manageOption--select .manageOption--select__more {
+    width: 36px;
+    height: 36px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #e0e1ef;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+table tbody tr .manageOption .manageOption--select .manageOption--select__more .icon{
+    background-position: -168px -48px;
+
+}
+.manageOption .more--form{
+    width: 200px;
+    z-index: 10;
+    background-color: #FFF;
+    border: 1px solid #e0e1ef;
+    border-radius: 4px;
+    position: absolute;
+    right:0px;
+    top: 44px;
+    padding: 4px 0px;
+    /* display: none; */
+   
+}
+.manageOption .more--form > div{
+width: 100%;
+height: 36px;
+padding-left: 16px;
+font-family: Regular;
+display: flex;
+align-items: center;
+
+}
+
+.manageOption .more--form > div:hover{
+    background-color: rgb(224, 235, 255);
+}
+.manageOption .more--form .more--form__delete{
+    color: #ef5350;
+}
 thead tr > th {
     position: sticky;
     z-index: 2;

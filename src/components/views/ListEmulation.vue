@@ -32,6 +32,7 @@
             v-for="(item, key) in this.listValue"
             :key="key"
             @dblclick="logData(item)"
+            @click="changeBackground(event)"
           >
             <td>
               <div class="clickSelect">
@@ -42,30 +43,52 @@
                 />
               </div>
             </td>
-            <td>{{ item.competitionTitle }}</td>
-            <td>{{ item.codeTitle }}</td>
+            <td>{{ item.rewardName }}</td>
+            <td>{{ item.rewardCode }}</td>
             <td>
               {{
-                item.objectReward == 2
+                item.rewardObject == 2
                   ? "Tập thể;Cá Nhân"
-                  : item.objectReward == 1
+                  : item.rewardObject == 0
                   ? "Cá Nhân"
                   : "Tập thể"
               }}
             </td>
-            <td>{{ item.levelReward }}</td>
+            <td>{{ item.levelID }}</td>
             <td>
               {{
-                item.typeMovement == 2
+                item.rewardType == 2
                   ? "Thường xuyên;Theo đợt"
-                  : item.levelReward == 1
+                  : item.levelReward == 0
                   ? "Thường xuyên"
                   : "Theo đợt"
               }}
             </td>
             <td>
-              {{ item.status }}
+              {{ item.rewardStatus == 0 ? "Sử dụng" : "Ngừng sử dụng" }}
             </td>
+            <div class="manageOption">
+              <div class="manageOption--select">
+                <div class="manageOption--select__edit">
+                  <div class="icon bg"></div>
+                </div>
+                <div
+                  class="manageOption--select__more"
+                  @click="showMoreForm(item.rewardStatus)"
+                >
+                  <div class="icon bg"></div>
+                </div>
+              </div>
+              <div
+                class="more--form"
+                v-if="this.active"
+                @mouseleave="changeActive"
+              >
+                <div class="more--form__use" :class="{disabled : item.rewardStatus == 0 }">Sử dụng</div>
+                <div class="more--form__stop " :class="{disabled : item.rewardStatus == 1 }">Ngừng sử dụng</div>
+                <div class="more--form__delete">Xoá</div>
+              </div>
+            </div>
           </tr>
         </tbody>
       </table>
@@ -81,6 +104,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import $ from "jquery";
 
 //  Tập thể:0 Cá nhân:1 Tập thể và cá nhân 2
@@ -91,112 +115,16 @@ export default {
   data() {
     return {
       listValue: {},
-      rowValue: [],
       listSelect: [],
+      active: false,
     };
   },
   created() {
-    this.listValue = [
-      {
-        competitionTitle: "Lao động tiên tiến",
-        codeTitle: "LĐTTCH",
-        objectReward: 1,
-        levelReward: "Cấp huyện tương đương",
-        typeMovement: 0,
-        status: "Sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
-        codeTitle: "CSTDCT",
-        objectReward: 0,
-        levelReward: "Cấp tỉnh tương đương",
-        typeMovement: 1,
-        status: "Sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua toàn quốc",
-        codeTitle: "CSTDTQ",
-        objectReward: 1,
-        levelReward: "Cấp nhà nước",
-        typeMovement: 2,
-        status: "Ngừng sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
-        codeTitle: "CSTDCT",
-        objectReward: 2,
-        levelReward: "Cấp tỉnh tương đương",
-        typeMovement: 1,
-        status: "Sử dụng",
-      },
-      {
-        competitionTitle: "Lao động tiên tiến",
-        codeTitle: "LĐTTCH",
-        objectReward: 1,
-        levelReward: "Cấp huyện tương đương",
-        typeMovement: 0,
-        status: "Sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
-        codeTitle: "CSTDCT",
-        objectReward: 2,
-        levelReward: "Cấp tỉnh tương đương",
-        typeMovement: 1,
-        status: "Sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua toàn quốc",
-        codeTitle: "CSTDTQ",
-        objectReward: 1,
-        levelReward: "Cấp nhà nước",
-        typeMovement: 2,
-        status: "Ngừng sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
-        codeTitle: "CSTDCT",
-        objectReward: 2,
-        levelReward: "Cấp tỉnh tương đương",
-        typeMovement: 0,
-        status: "Sử dụng",
-      },
-      {
-        competitionTitle: "Lao động tiên tiến",
-        codeTitle: "LĐTTCH",
-        objectReward: 0,
-        levelReward: "Cấp huyện tương đương",
-        typeMovement: 1,
-        status: "Sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
-        codeTitle: "CSTDCT",
-        objectReward: 0,
-        levelReward: "Cấp tỉnh tương đương",
-        typeMovement: 1,
-        status: "Sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua toàn quốc",
-        codeTitle: "CSTDTQ",
-        objectReward: 0,
-        levelReward: "Cấp nhà nước",
-        typeMovement: 2,
-        status: "Ngừng sử dụng",
-      },
-      {
-        competitionTitle: "Chiến sĩ thi đua cấp tỉnh",
-        codeTitle: "CSTDCT",
-        objectReward: 1,
-        levelReward: "Cấp tỉnh tương đương",
-        typeMovement: 1,
-        status: "Sử dụng",
-      },
-    ];
+    this.getAllData();
   },
   mounted() {
-    this.changeBackground(), this.scrollTable(), this.selectValue();
+    this.scrollTable(), this.selectValue();
+
     /* eslint-env jquery */
   },
   methods: {
@@ -206,12 +134,12 @@ export default {
      */
     //   Thay đổi màu background của hàng khi click chuột
     //  Thay đổi màu click xung quanh thành màu trắng
-
     changeBackground() {
       try {
+        var ele;
         $("tbody tr").click(function () {
           var array = $(this).siblings();
-          var ele = $(this);
+          ele = $(this);
           for (var i = 0; i < array.length; i++) {
             if (
               $(array[i]).children().css("background-color") ==
@@ -221,11 +149,12 @@ export default {
             }
           }
           $(this).children().css("background-color", " #e0ebff");
-          $("body").click(function (event) {
-            if (!$(event.target).is("td")) {
-              ele.children().css("background-color", "");
-            }
-          });
+        });
+
+        $("body").click(function (event) {
+          if (!$(event.target).is("td")) {
+            ele.children().css("background-color", "");
+          }
         });
       } catch (error) {
         console.log(error);
@@ -270,6 +199,33 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    /**
+     * Author :VxHieu
+     * 23/11/2022
+     */
+    //Call Api lấy danh sách tất cả các danh hiệu thi đua
+    getAllData() {
+      axios
+        .get("http://localhost:5194/api/Emulations")
+        .then((response) => {
+          this.listValue = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    /**
+     * Author :VxHieu
+     * 24/11/2022
+     */
+    // nhấn vào icon thêm nữa để hiện ra các lựa chọn sử dụng, ngừng sử dụng, xoá
+    showMoreForm(item) {
+      this.active = true;
+      console.log(item);
+    },
+    changeActive() {
+      this.active = false;
     },
   },
 };

@@ -1,6 +1,6 @@
 @font-face {
-    font-family: Medium;
-    src: url("../../assets/Fonts/GoogleSans-Medium.ebe648aa.woff2");
+    font-family: Regular;
+    src: url("../../assets/Fonts/GoogleSans-Regular.77b210bc.woff2");
 }
 .formadd {
     height: 100vh;
@@ -109,18 +109,22 @@
     font-family: Regular;
 }
 
-.wrapForm--data .wrapForm--data__main .main--left .main--left__input select,
+.wrapForm--data .wrapForm--data__main .main--left .main--left__input
 input {
+    font-family: Regular;
+}
+.wrapForm--data .wrapForm--data__main .main--left .main--left__input .dropdown .select span {
+    font-family: Regular;
+}
+.wrapForm--data .wrapForm--data__main .main--left .main--left__input .dropdown .dropdown-menu li{
     font-family: Regular;
 }
 .wrapForm--data .wrapForm--data__main .main--left .main--left__input input:hover {
     border: 1px solid #1a73e8;
 }
+
 .wrapForm--data .wrapForm--data__main .main--left .main--left__input input:focus-visible {
     outline: none;
-}
-.wrapForm--data .wrapForm--data__main .main--left .main--left__input select option {
-    width: 10px;
 }
 
 .wrapForm--data .wrapForm--data__main .main--right {
@@ -168,6 +172,12 @@ input {
     border: 1px solid #e0e1ef;
     font-family: Regular;
     border-radius: 4px;
+}
+.wrapForm--data__bottom .bottom--text textarea:hover{
+    border: 1px solid #1a73e8;
+}
+.wrapForm--data__bottom .bottom--text textarea:focus-visible{
+    outline: none;
 }
 .wrapForm--data__status {
     margin-top: 16px;

@@ -87,32 +87,21 @@
                 >
               </div>
               <div class="main--left__input">
-                <select name="" id="" class="select" :disabled="isStatus">
-                  <option
-                    :selected="this.data.levelReward == 'Cấp nhà nước'"
-                    value=""
-                  >
-                    Cấp Nhà nước
-                  </option>
-                  <option
-                    :selected="this.data.levelReward == 'Cấp tỉnh tương đương'"
-                    value=""
-                  >
-                    Cấp Tỉnh/tương đương
-                  </option>
-                  <option
-                    :selected="this.data.levelReward == 'Cấp huyện'"
-                    value=""
-                  >
-                    Cấp Huyện/tương đương
-                  </option>
-                  <option
-                    :selected="this.data.levelReward == 'Cấp xã tương đương'"
-                    value=""
-                  >
-                    Cấp Xã/tương đương
-                  </option>
-                </select>
+                <div class="dropdown">
+                  <div class="select">
+                    <span>{{this.dataInput.level}} </span>
+                    <i class="fa fa-chevron-left"></i>
+                  </div>
+               <input type="hidden" name="levelReward" />
+                  
+                  <div class="icon-dropdown bg"></div>
+                  <ul class="dropdown-menu">
+                    <li id="male">Cấp nhà nước</li>
+                    <li id="male">Cấp Tỉnh/tương đương</li>
+                    <li id="female">Cấp Huyện/tương đương</li>
+                    <li id="female">Cấp Xã/tương đương</li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div class="main--right">
@@ -128,7 +117,7 @@
                     class="checkbox"
                     type="checkbox"
                     :checked="
-                      dataInput.reward == 1 ||
+                      dataInput.reward == 0 ||
                       this.isStatus == false ||
                       dataInput.reward == 2
                     "
@@ -140,7 +129,7 @@
                   <input
                     class="checkbox"
                     type="checkbox"
-                    :checked="dataInput.reward == 0 || dataInput.reward == 2"
+                    :checked="dataInput.reward == 1 || dataInput.reward == 2"
                     :disabled="isStatus"
                   />
                   <label for="">Tập thể</label>
@@ -161,7 +150,7 @@
                     type="checkbox"
                     :disabled="isStatus"
                     :checked="
-                      dataInput.movement == 0 ||
+                      dataInput.movement == 1 ||
                       dataInput.movement == 2 ||
                       this.isStatus == false
                     "
@@ -174,7 +163,7 @@
                     type="checkbox"
                     :disabled="isStatus"
                     :checked="
-                      dataInput.movement == 1 || dataInput.movement == 2
+                      dataInput.movement == 0 || dataInput.movement == 2
                     "
                   />
                   <label for="">Theo đợt</label>
@@ -205,7 +194,7 @@
                 <input
                   type="radio"
                   name="use"
-                  :checked="dataInput.status == 'Sử dụng'"
+                  :checked="dataInput.status == 0 "
                 />
                 <label style="margin-left: 10px" for="">Sử dụng</label>
               </div>
@@ -213,7 +202,7 @@
                 <input
                   type="radio"
                   name="use"
-                  :checked="dataInput.status == 'Ngừng sử dụng'"
+                  :checked="dataInput.status == 1"
                 />
                 <label style="margin-left: 10px" for="">Ngừng sử dụng</label>
               </div>
@@ -236,6 +225,8 @@
 </template>
 
 <script>
+import $ from "jquery";
+
 export default {
   props: {
     data: {},
@@ -244,18 +235,19 @@ export default {
     return {
       valueForm: [],
       dataInput: {
-        name: this.data.competitionTitle,
-        code: this.data.codeTitle,
-        reward: this.data.objectReward,
-        level: this.data.levelReward,
-        movement: this.data.typeMovement,
-        status: this.data.status,
+        name: this.data.rewardName,
+        code: this.data.rewardCode,
+        reward: this.data.rewardObject,
+        level: this.data.levelID,
+        movement: this.data.rewardType,
+        status: this.data.rewardStatus,
       },
       isStatus: false,
       errName: [],
       errCode: [],
       isActive: false,
       isBorder: false,
+      inputReward:'1'
     };
   },
   created() {
@@ -263,8 +255,59 @@ export default {
   },
   mounted() {
     this.$nextTick(() => this.$refs.input.focus());
+    this.dropdown();
+   
+  },
+  watch:{
+    inputReward(newValue,oldValue){
+      console.log("newValue"+newValue);
+      console.log("oldValue"+oldValue);
+    }
+  },
+  beforeUpdate() {
+    console.log("change:"+this.inputReward);
   },
   methods: {
+    /**
+     * Author:VｘHieu
+     * 22/11/2022
+     */
+    // click vào input để xổ ra cac lựa chọn
+    dropdown() {
+      $(".dropdown").click(function () {
+        $(this).toggleClass("active");
+        $(this).find(".dropdown-menu").slideToggle(300);
+      });
+      $(".dropdown").focusout(function () {
+        $(this).removeClass("active");
+        $(this).find(".dropdown-menu").slideUp(300);
+      });
+      $(".dropdown .dropdown-menu li").click(function () {
+        $(this).parents(".dropdown").find("span").text($(this).text());
+        // bind value vào input
+        console.log("bf"+this.inputReward);
+        this.inputReward=$(this).text();
+        console.log("levelInput:"+this.inputReward);
+        var getInput = $(this).parents(".dropdown").children();
+        $(getInput[0]).val($(this).text());
+        // set màu background của option được chọn
+        // Thêm dấu tick cho option được chọn
+        $(this).css("background-color", "#e0ebff");
+        var arrayStyle = $(this).siblings();
+        for (var i = 0; i < arrayStyle.length; i++) {
+          if ($(arrayStyle[i]).css("backgroundColor") == "rgb(224, 235, 255)") {
+            $(arrayStyle[i]).css("backgroundColor", "");
+            $(arrayStyle[i]).children().remove();
+          }
+        }
+        $(this).append("<div class='icon-checked bg'></div>");    
+        $(this)
+          .parents(".dropdown")
+          .find("text")
+          .attr("value", $(this).attr("id"));
+          
+      });
+    },
     changeAtr() {
       if (this.data) {
         this.isStatus = true;
@@ -280,23 +323,34 @@ export default {
     // Dùng trim để bắt validate nhập tên là khoảng trắng
     checkValidate() {
       try {
-        console.log(this.errName);
-        if (!this.dataInput.name.trim()) {
+        if (!this.dataInput.name) {
           this.errName.push("Tên danh hiệu thi đua không được để trống.");
-          this.isBorder = true;
+        }
+        if (!this.dataInput.name.trim()) {
+          if (this.errName.length == 0) {
+            this.errName.push("Tên danh hiệu thi đua không được để trống.");
+            this.isBorder = true;
+          }
         } else {
           this.errName.pop();
           this.isBorder = false;
         }
+
+        console.log(this.errName.length, this.errName);
       } catch (error) {
         console.log(error);
       }
     },
     // validate mã danh hiệu
     checkValidateCode() {
-      if (!this.dataInput.code.trim()) {
+      if (!this.dataInput.code) {
         this.errCode.push("Mã danh hiệu không được để trống.");
-        this.isActive = true;
+      }
+      if (!this.dataInput.code.trim()) {
+        if (this.errCode.length == 0) {
+          this.errCode.push("Mã danh hiệu không được để trống.");
+          this.isActive = true;
+        }
       } else {
         this.errCode.pop();
         this.isActive = false;
@@ -322,4 +376,11 @@ export default {
 </script>
 <style scoped>
 @import url("../../css/layout/form_add.css");
+.icon-dropdown {
+  position: absolute;
+  top: 15px;
+  right: 0px;
+  background-image: url("../../assets/svgimg/ic_drop-down.fa70eead.svg");
+  position: absolute;
+}
 </style>

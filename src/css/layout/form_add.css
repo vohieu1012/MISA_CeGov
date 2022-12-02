@@ -48,14 +48,15 @@
 }
 .wrapFrom--title .wrapFrom--title__option .option--close {
     background-position: -242px -26px;
-    /* margin: 10px 8px; */
-    margin-left: 8px;
     margin-top: 4px;
+    margin-left: 8px;
     position: relative;
 }
 .wrapFrom--title .wrapFrom--title__option .option--close:hover {
-    /* background-color: #ef5350; */
-    /* background-color: red; */
+    background-position: -260px -20px;
+    position: relative;
+    top: -6px;
+    left: -6px;
 }
 .wrapFrom--title .wrapFrom--title__option .option--close:hover .tooltip {
     visibility: visible;

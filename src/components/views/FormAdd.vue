@@ -4,6 +4,7 @@
       <div class="wrapFrom--title">
         <div class="wrapFrom--title__para" v-if="!isStatus">
           Thêm danh hiệu thi đua
+         
         </div>
         <div class="wrapFrom--title__para" v-if="isStatus">
           Sửa danh hiệu thi đua
@@ -19,7 +20,7 @@
           </div>
         </div>
       </div>
-      <form method="post" @submit="checkValidate">
+      <form action="">
         <div class="wrapForm--data">
           <div class="wrapForm--data__top">
             <div class="top--item">
@@ -89,7 +90,7 @@
               <div class="main--left__input">
                 <div class="dropdown">
                   <div class="select">
-                    <span>{{this.dataInput.level}} </span>
+                    <span>{{this.enumsEmulation["1"]}} </span>
                     <i class="fa fa-chevron-left"></i>
                   </div>
                <input type="hidden" name="levelReward" />
@@ -116,11 +117,8 @@
                   <input
                     class="checkbox"
                     type="checkbox"
-                    :checked="
-                      dataInput.reward == 0 ||
-                      this.isStatus == false ||
-                      dataInput.reward == 2
-                    "
+                    value="0"
+                    v-model="checkedNames"
                     :disabled="isStatus"
                   />
                   <label for="">Cá nhân</label>
@@ -129,7 +127,8 @@
                   <input
                     class="checkbox"
                     type="checkbox"
-                    :checked="dataInput.reward == 1 || dataInput.reward == 2"
+                    value="1"
+                    v-model="checkedNames"
                     :disabled="isStatus"
                   />
                   <label for="">Tập thể</label>
@@ -149,11 +148,9 @@
                     class="checkbox"
                     type="checkbox"
                     :disabled="isStatus"
-                    :checked="
-                      dataInput.movement == 1 ||
-                      dataInput.movement == 2 ||
-                      this.isStatus == false
-                    "
+                    checked
+                    value="1"
+                    v-model="checkedTypes"
                   />
                   <label for="">Thường xuyên</label>
                 </div>
@@ -162,9 +159,8 @@
                     class="checkbox"
                     type="checkbox"
                     :disabled="isStatus"
-                    :checked="
-                      dataInput.movement == 0 || dataInput.movement == 2
-                    "
+                    value="0"
+                    v-model="checkedTypes"
                   />
                   <label for="">Theo đợt</label>
                 </div>
@@ -215,9 +211,9 @@
             <button class="btn" @click="this.$emit('closeForm')">Huỷ</button>
           </div>
           <div class="double--select" v-if="!isStatus">
-            <button class="btn primary-outline">Lưu & thêm mới</button>
+            <button class="btn primary-outline" @click="insertData">Lưu & thêm mới</button>
           </div>
-          <div class="save"><button class="btn primary">Lưu</button></div>
+          <div class="save"><button class="btn primary" @click="insertData">Lưu</button></div>
         </div>
       </form>
     </div>
@@ -226,6 +222,8 @@
 
 <script>
 import $ from "jquery";
+import axios from "axios";
+
 
 export default {
   props: {
@@ -247,7 +245,16 @@ export default {
       errCode: [],
       isActive: false,
       isBorder: false,
-      inputReward:'1'
+      inputReward:'1',
+      errorPush:[],
+      enumsEmulation:{
+        1: "Cấp Nhà nước",
+        2: "Cấp Tỉnh/tương đương",
+        3: "Cấp Huyện/tương đương",
+        4: "Cấp Xã/tương đương"
+      },
+     checkedNames:[],
+     checkedTypes:[]
     };
   },
   created() {
@@ -257,15 +264,6 @@ export default {
     this.$nextTick(() => this.$refs.input.focus());
     this.dropdown();
    
-  },
-  watch:{
-    inputReward(newValue,oldValue){
-      console.log("newValue"+newValue);
-      console.log("oldValue"+oldValue);
-    }
-  },
-  beforeUpdate() {
-    console.log("change:"+this.inputReward);
   },
   methods: {
     /**
@@ -323,6 +321,8 @@ export default {
     // Dùng trim để bắt validate nhập tên là khoảng trắng
     checkValidate() {
       try {
+     
+        console.log(this.enumsEmulation["1"]);
         if (!this.dataInput.name) {
           this.errName.push("Tên danh hiệu thi đua không được để trống.");
         }
@@ -371,6 +371,32 @@ export default {
       this.isActive = true;
       this.dataInput.code = "";
     },
+    // Thêm mới danh hiệu thi đua
+    insertData(){
+      var rewardOb;
+      var rewardType;
+      this.checkedNames.length==2 ?  rewardOb=2 : rewardOb=Number(this.checkedNames[0]);
+      this.checkedTypes.length==2 ?  rewardType=2 :  rewardType=Number(this.checkedTypes[0]);
+      
+      var data = {
+      "RewardName":this.dataInput.name,
+      "RewardCode":this.dataInput.code,
+      "RewardObject":rewardOb,
+      "LevelID":1,
+      "RewardType":rewardType,
+      "RewardStatus":0}
+      axios.post("http://localhost:5194/api/Rewards",data,
+      {
+          headers: {
+            Accept: "application/json"
+          }
+      }).then((response)=>{
+        console.log(response);
+      }).catch((e)=>{
+        this.errorPush.push(e);
+       
+      })
+      }
   },
 };
 </script>

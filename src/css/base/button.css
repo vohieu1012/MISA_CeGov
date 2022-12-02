@@ -48,3 +48,12 @@
 .btn-close:hover {
     background: #fef1f1;
 }
+.btn-danger{
+    color: #fff;
+    background: #ef5350;
+    border: 1px solid #ef5350;
+    padding: 0px 16px;
+    border-radius: 4px;
+    margin-left: 12px;
+    cursor: pointer;
+}

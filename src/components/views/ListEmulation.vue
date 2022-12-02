@@ -32,7 +32,8 @@
             v-for="(item, key) in this.listValue"
             :key="key"
             @dblclick="logData(item)"
-            @click="changeBackground(event)"
+            @click="changeBackground(item)"
+           
           >
             <td>
               <div class="clickSelect">
@@ -54,7 +55,7 @@
                   : "Tập thể"
               }}
             </td>
-            <td>{{ item.levelID }}</td>
+            <td>{{this.enumsEmulation[`${item.levelID}`]  }}</td>
             <td>
               {{
                 item.rewardType == 2
@@ -74,7 +75,7 @@
                 </div>
                 <div
                   class="manageOption--select__more"
-                  @click="showMoreForm(item.rewardStatus)"
+                  @click="showMoreForm(event)"
                 >
                   <div class="icon bg"></div>
                 </div>
@@ -84,9 +85,21 @@
                 v-if="this.active"
                 @mouseleave="changeActive"
               >
-                <div class="more--form__use" :class="{disabled : item.rewardStatus == 0 }">Sử dụng</div>
-                <div class="more--form__stop " :class="{disabled : item.rewardStatus == 1 }">Ngừng sử dụng</div>
-                <div class="more--form__delete">Xoá</div>
+                <div
+                  class="more--form__use"
+                  :class="{ disabled: item.rewardStatus == 0 }"
+                >
+                  Sử dụng
+                </div>
+                <div
+                  class="more--form__stop"
+                  :class="{ disabled: item.rewardStatus == 1 }"
+                >
+                  Ngừng sử dụng
+                </div>
+                <div class="more--form__delete" @click="getDataRow(item)">
+                  Xoá
+                </div>
               </div>
             </div>
           </tr>
@@ -117,6 +130,12 @@ export default {
       listValue: {},
       listSelect: [],
       active: false,
+      enumsEmulation:{
+        1: "Cấp Nhà nước",
+        2: "Cấp Tỉnh/tương đương",
+        3: "Cấp Huyện/tương đương",
+        4: "Cấp Xã/tương đương"
+      }
     };
   },
   created() {
@@ -207,7 +226,7 @@ export default {
     //Call Api lấy danh sách tất cả các danh hiệu thi đua
     getAllData() {
       axios
-        .get("http://localhost:5194/api/Emulations")
+        .get("http://localhost:5194/api/Rewards")
         .then((response) => {
           this.listValue = response.data;
         })
@@ -220,12 +239,24 @@ export default {
      * 24/11/2022
      */
     // nhấn vào icon thêm nữa để hiện ra các lựa chọn sử dụng, ngừng sử dụng, xoá
-    showMoreForm(item) {
+    showMoreForm(e) {
+      console.log(e);
       this.active = true;
-      console.log(item);
     },
     changeActive() {
       this.active = false;
+    },
+
+    /**
+     * Author:VxHieu
+     * 27/11/2022
+     */
+    getDataRow(item) {
+      try {
+        this.$emit("deleteValue", item);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

@@ -1,0 +1,53 @@
+@font-face {
+  font-family: Regular;
+  src: url("../../assets/Fonts/GoogleSans-Regular.77b210bc.woff2");
+}
+.dialog {
+  top: 0;
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+.dialog--content {
+  padding: 20px 16px;
+  width: 444px;
+  min-height: 144px;
+  /* min-width: 444px; */
+  background-color: #fff;
+  /* min-height: 144px; */
+  box-shadow: 0 0 16px rgb(23 27 42 / 24%);
+  border-radius: 4px;
+
+}
+.dialog--content .content--title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dialog--content .content--title span {
+  font-size: 20px;
+}
+.dialog--content .content--title .content--title__icon {
+  background-position: -236px -20px;
+}
+.dialog--content .content--title .content--title__icon:hover{
+    background-position: -260px -20px;
+
+}
+.dialog--content .content--message {
+  min-height: 77px;
+}
+.dialog--content .content--message .content--message__normal {
+  font-family: Regular;
+}
+
+.dialog--content .content--btn {
+  display: flex;
+  justify-content: end;
+}

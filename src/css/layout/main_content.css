@@ -2,6 +2,10 @@
     font-family: Regular;
     src: url("../../assets/Fonts/GoogleSans-Regular.77b210bc.woff2");
 }
+@font-face {
+    font-family: Medium;
+    src: url("../../assets/Fonts/GoogleSans-Medium.ebe648aa.woff2");
+}
 .maincontent {
     width: calc(100% - 204px);
     height: 100%;
@@ -125,7 +129,12 @@ button {
 .center--form .center--form__reward .reward--data .reward--data__block label {
     display: block;
     margin-bottom: 12px;
-    font-family: Regular;
+    font-family: Medium;
+    color: #666;
+    padding: 8px 8px 0 0;
+}
+.center--form .center--form__reward .reward--data .reward--data__block:not(:first-child) label {
+    margin-top: 12px;
 }
 .center--form .center--form__reward .reward--data .reward--data__block select {
     width: 100%;

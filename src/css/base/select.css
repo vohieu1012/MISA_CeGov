@@ -5,6 +5,9 @@
     border-radius: 4px;
     padding: 0px 12px;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+ 
 }
 .select:hover{
     border: 1px solid #1a73e8;

@@ -4,7 +4,7 @@
     <div class="wrap">
       <TheSidebar></TheSidebar>
       <div class="maincontent">
-        <TheMain @onAddClick="changeIsShow" :value="this.valueEdit"></TheMain>
+        <TheMain @onAddClick="changeIsShow" :value="this.valueEdit" @unCheck="unCheck()"></TheMain>
         <ListEmulation
           @valueReward="valueShow"
           @valueSelect="logSelect"
@@ -15,10 +15,13 @@
     <FormAdd
       v-if="isShow"
       @closeForm="closeForm"
+      @successSave="successSave"
+      @errorInsert="errorInsert"
       :data="this.valueForm"
     ></FormAdd>
     <MISALoading v-if="false"></MISALoading>
-    <MISADialog v-if="isDialog" @closeDialog="closeDialog" :valueDialog="this.valueDelete"></MISADialog>
+    <MISADialog v-if="isDialog" @closeDialog="closeDialog" :valueDialog="this.valueDelete" @deleteSuccess="successSave" :errorValue="this.valueError"></MISADialog>
+    <MISAToast :valueToast="this.valueToast" @closeToast="closeToast" v-if="this.isToast"></MISAToast>
   </div>
 </template>
 <script>
@@ -29,6 +32,7 @@ import ListEmulation from "./ListEmulation.vue";
 import FormAdd from "./FormAdd.vue";
 import MISALoading from "../base/MISALoading.vue";
 import MISADialog from "../base/MISADialog.vue";
+import MISAToast from "../base/MISAToast.vue";
 // import $ from "jquery";
 
 // import ListEmulation from "./ListEmulation.vue";
@@ -42,14 +46,19 @@ export default {
     FormAdd,
     MISALoading,
     MISADialog,
+    MISAToast
   },
   data() {
     return {
       isShow: false,
       isDialog: false,
+      isUnCheck:false,
       valueForm: [],
       valueEdit: [],
       valueDelete: [],
+      valueToast:{},
+      isToast:false,
+      valueError:[],
     };
   },
 
@@ -65,8 +74,11 @@ export default {
       this.isShow = false;
     },
     // bắt các sự kiện đóng dialog
+    // đặt lại các giá trị dialog về mặc định
     closeDialog() {
       this.isDialog = false;
+      this.valueDelete=[];
+      this.valueError=[];
     },
     // truyền valueForm
     // hiển thị chỉnh sửa
@@ -88,6 +100,22 @@ export default {
     logSelect(item) {
       this.valueEdit = item;
     },
+    // bắt sự kiện bỏ chọn
+    unCheck(){
+      alert(1);
+    },
+    // Gán giá trị của value Toast msg
+    // thay đổi trạng thái mở toast msg
+    successSave(item){
+      this.isToast=true;
+      this.valueToast=item;
+    },
+    // reload dữ liệu khi thêm mới thành công
+    errorInsert(item){
+      this.valueError=item;
+      this.isDialog=true;
+    }
+    
   },
   /* eslint-env jquery */
 };

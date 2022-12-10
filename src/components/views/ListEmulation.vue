@@ -5,10 +5,13 @@
         <thead>
           <tr>
             <th>
-              <div><input class="select--value" type="checkbox" /></div>
+              <div><input class="select--value" type="checkbox" @click="changeChecked"/>
+                <div v-if="isSelected" class="select--multi" @click="deleteChecked"></div>
+              </div>
+             
             </th>
-            <th style="min-width: 310px; max-width: 310px">
-              <div>Tên danh hiệu thi đua</div>
+            <th  class="reward--sticky" style="min-width: 310px; max-width: 310px">
+              <div >Tên danh hiệu thi đua</div>
             </th>
             <th style="width: 160px; max-width: 160px; min-width: 160px">
               <div>Mã danh hiệu</div>
@@ -33,18 +36,20 @@
             :key="key"
             @dblclick="logData(item)"
             @click="changeBackground(item)"
-           
           >
             <td>
               <div class="clickSelect">
                 <input
                   class="select--value"
-                  @click="selectValue(item)"
+                  @click="selectValue(item.rewardID)"
                   type="checkbox"
+                  v-model="this.listSelect"
+                  :value=item.rewardID
+                 
                 />
               </div>
             </td>
-            <td>{{ item.rewardName }}</td>
+            <td class="reward--sticky"><div class="reward--sticky__wrap">{{ item.rewardName }}</div></td>
             <td>{{ item.rewardCode }}</td>
             <td>
               {{
@@ -55,7 +60,7 @@
                   : "Tập thể"
               }}
             </td>
-            <td>{{this.enumsEmulation[`${item.levelID}`]  }}</td>
+            <td>{{ this.enumsEmulation[`${item.levelID}`] }}</td>
             <td>
               {{
                 item.rewardType == 2
@@ -66,6 +71,8 @@
               }}
             </td>
             <td>
+              <span v-if="( item.rewardStatus ==0 )" class="actived"></span>
+              <span v-if="( item.rewardStatus == 1)" class="not-active"></span>
               {{ item.rewardStatus == 0 ? "Sử dụng" : "Ngừng sử dụng" }}
             </td>
             <div class="manageOption">
@@ -111,31 +118,61 @@
         Tổng số <span>{{ Object.keys(listValue).length }}</span> bản ghi
       </div>
       <div class="tableData--paging__right">
-        <div class="paging--right__index"></div>
+        <div class="paging--right__index">
+          <div class="index--para" >Số bản ghi/trang</div>
+          <div class="index--nunmber">
+            <Dropdown
+                  class="select drop-down"
+                  v-model="selectedPaging"
+                  :options="rewardPaging"
+                  optionLabel="name"
+                  placeholder="10"
+                />
+          </div>
+          <div class="index--para"><span></span> bản ghi</div>
+          <div class="index--nav">
+            <div class="index--nav__prev bg"></div>
+            <div class="index--nav__move bg"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import Dropdown from "primevue/dropdown";
 import axios from "axios";
 import $ from "jquery";
-
 //  Tập thể:0 Cá nhân:1 Tập thể và cá nhân 2
 //  Theo đợt 0 Thường xuyên 1; Thường xuyên và theo đợt
 
 export default {
-  props: [],
+  props: {
+   
+  },
+  components: {
+    Dropdown,
+  },
   data() {
     return {
       listValue: {},
       listSelect: [],
+      listID:[],
+      isSelected:false,
       active: false,
+      isChecked:false,
       enumsEmulation:{
         1: "Cấp Nhà nước",
         2: "Cấp Tỉnh/tương đương",
         3: "Cấp Huyện/tương đương",
         4: "Cấp Xã/tương đương"
-      }
+      }, selectedPaging: null,
+      rewardPaging: [
+        { name: "10", code: "NY" },
+        { name: "20", code: "RM" },
+        { name: "50", code: "RM" },
+        { name: "100", code: "LDN" },
+      ],
     };
   },
   created() {
@@ -143,6 +180,7 @@ export default {
   },
   mounted() {
     this.scrollTable(), this.selectValue();
+   
 
     /* eslint-env jquery */
   },
@@ -206,18 +244,29 @@ export default {
     selectValue(item) {
       try {
         if (item) {
+          this.isSelected=true;
+          
           if (this.listSelect.length == 0) {
             this.listSelect.push(item);
+            
           } else if (jQuery.inArray(item, this.listSelect) == -1) {
+            this.listSelect.indexOf(item);
             this.listSelect.push(item);
           } else {
-            this.listSelect.pop(item);
+            console.log( this.listSelect);
+            this.listSelect.length == 1 ? this.isSelected=false : "";
+            this.listSelect.splice(this.listSelect.indexOf(item),1);
           }
         }
         this.$emit("valueSelect", this.listSelect);
       } catch (error) {
         console.log(error);
       }
+    },
+    deleteChecked(){
+      this.isSelected=false;
+      this.listSelect=[];
+      this.$emit("valueSelect", this.listSelect);
     },
     /**
      * Author :VxHieu
@@ -229,6 +278,7 @@ export default {
         .get("http://localhost:5194/api/Rewards")
         .then((response) => {
           this.listValue = response.data;
+          
         })
         .catch((e) => {
           console.log(e);
@@ -258,9 +308,34 @@ export default {
         console.log(error);
       }
     },
+     /**
+     * Author:VxHieu
+     * 4/12/2022
+     */
+    //kiểm tra sự kiện click vào checkbox
+    changeChecked(){
+      if(this.listID.length==0){
+        this.listValue.forEach(element => {
+        this.listID.push(element.rewardID);
+      });
+      }
+      this.isChecked=!this.isChecked;
+      if(!this.isChecked){
+        this.listSelect.splice(0,this.listSelect.length);
+      }else{
+        this.listSelect=[];
+        if(this.listSelect.length==0){
+        this.listSelect.push(...this.listID);
+        }
+      }
+      this.$emit("valueSelect", this.listSelect);
+     
+    },
+  
   },
 };
 </script>
 <style scoped>
 @import url("../../css/layout/form_detail.css");
+
 </style>

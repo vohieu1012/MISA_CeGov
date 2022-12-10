@@ -1,5 +1,5 @@
 <template>
-  <div class="maincontent--title">Danh hiệu thi đua</div>
+  <div class="maincontent--title" @click="closeFilter">Danh hiệu thi đua</div>
   <div class="maincontent--toolbar">
     <div class="wrap--toolbar">
       <div class="maincontent--toolbar__left">
@@ -19,47 +19,51 @@
         </div>
         <div class="center--form" v-if="isFilter">
           <div class="center--form__triangle triangle--up"></div>
-          <div class="center--form__reward">
+          <div class="center--form__reward" @mouseleave="showCount">
             <div class="reward--title">
               <div class="reward--title__name">Lọc danh hiệu</div>
               <div class="reward--title__close bg" @click="closeFilter"></div>
             </div>
             <div class="reward--data">
               <div class="reward--data__block">
-                <label for=""> Đối tượng khen thưởng </label>
-                <select name="" id="" class="select">
-                  <option value="">Tất cả</option>
-                  <option value="">Gia đình</option>
-                  <option value="">Tập thể</option>
-                  <option value="">Cá nhân</option>
-                  <option value="">Tập thể và cá nhân</option>
-                </select>
+                <label for="">Đối tượng khen thưởng</label>
+                <Dropdown
+                  class="select drop-down"
+                  v-model="selectedObject"
+                  :options="rewardObject"
+                  optionLabel="name"
+                  placeholder="Tất cả"
+                />
               </div>
               <div class="reward--data__block">
                 <label for=""> Cấp khen thưởng </label>
-                <select name="" id="" class="select">
-                  <option value="">Tất cả</option>
-                  <option value="">Cấp Nhà nước</option>
-                  <option value="">Cấp Tỉnh/tương đương</option>
-                  <option value="">Cá Huyện/tương đương</option>
-                  <option value="">Tập Xã/tương đương</option>
-                </select>
+                <Dropdown
+                  class="select  drop-down"
+                  v-model="selectedLevel"
+                  :options="rewardLevel"
+                  optionLabel="name"
+                  placeholder="Tất cả"
+                />
               </div>
               <div class="reward--data__block">
                 <label for=""> Loại phong trào </label>
-                <select name="" id="" class="select">
-                  <option value="">Tất cả</option>
-                  <option value="">Thường xuyên</option>
-                  <option value="">Theo đợt</option>
-                </select>
+                <Dropdown
+                  class="select  drop-down"
+                  v-model="selectedType"
+                  :options="rewardType"
+                  optionLabel="name"
+                  placeholder="Tất cả"
+                />
               </div>
               <div class="reward--data__block">
                 <label for=""> Trạng thái</label>
-                <select name="" id="" class="select">
-                  <option value="">Tất cả</option>
-                  <option value="">Sử dụng</option>
-                  <option value="">Ngừng sử dụng</option>
-                </select>
+                <Dropdown
+                  class="select  drop-down"
+                  v-model="selectedStatus"
+                  :options="rewardStatus"
+                  optionLabel="name"
+                  placeholder="Tất cả"
+                />
               </div>
             </div>
             <div class="reward--space"></div>
@@ -99,13 +103,14 @@
   </div>
 </template>
 <script>
-// import { watch } from "@vue/runtime-core";
-
+import Dropdown from "primevue/dropdown";
 export default {
   props: {
     value: {},
   },
-  components: {},
+  components: {
+    Dropdown,
+  },
   data() {
     return {
       isShow: false,
@@ -113,7 +118,35 @@ export default {
       valueRow: this.value,
       textSearch: "",
       isClear: false,
-
+      selectedObject: null,
+      rewardObject: [
+        { name: "Tất cả", code: "NY" },
+        { name: "Gia đình", code: "RM" },
+        { name: "Tập thể", code: "RM" },
+        { name: "Cá nhân", code: "LDN" },
+        { name: "Cá nhân và tập thể", code: "IST" },
+      ],
+      selectedLevel: null,
+      rewardLevel: [
+        { name: "Tất cả", code: "NY" },
+        { name: "Cấp Nhà nước", code: "RM" },
+        { name: "Cấp Tỉnh/tương đương", code: "RM" },
+        { name: "Cá Huyện/tương đương", code: "LDN" },
+        { name: "Cá Xã/tương đương", code: "IST" },
+      ],
+      selectType: null,
+      rewardType: [
+        { name: "Tất cả", code: "NY" },
+        { name: "Thường xuyên", code: "RM" },
+        { name: "Theo đợt", code: "RM" },
+      ],
+      selectedStatus: null,
+      rewardStatus: [
+        { name: "Tất cả", code: "NY" },
+        { name: "Sử dụng", code: "RM" },
+        { name: "Ngừng sử dụng", code: "RM" },
+        
+      ],
     };
   },
   created() {
@@ -137,6 +170,7 @@ export default {
     ShowDetail() {
       this.$emit("onAddClick");
     },
+
     // thay đổi button add thành các option
     changeAdd() {
       try {
@@ -149,6 +183,8 @@ export default {
         console.log(error);
       }
     },
+    // thư viện dropdown
+
     // Thêm số 0 nếu length <10
     formatLength(length) {
       if (length < 10) {
@@ -167,9 +203,18 @@ export default {
     closeFilter() {
       this.isFilter = false;
     },
+    //Xoá các giá trị được chọn
+    showCount() {
+      // this.closeFilter();
+    },
   },
 };
 </script>
 <style scoped>
 @import url("../../css/layout/main_content.css");
+/* custom dropdown */
+.p-dropdown .p-dropdown-label.p-placeholder {
+    color: red !important;
+}
+/* end dropdown */
 </style>

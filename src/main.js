@@ -1,12 +1,22 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-createApp(App).mount('#app')
+import PrimeVue from 'primevue/config';
 window.$ = window.jQuery = require('jquery');
-createApp(App).mount('#app')
-
 // import axios
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-const app = createApp(App)
+// import i18n
+import i18n from './locales/i18n';
+import ToastService from 'primevue/toastservice'
+import Toast from 'primevue/toast';
+
+const app = createApp(App);
+
+app.use(i18n);
+
+
+app.use(PrimeVue);
+app.use(ToastService);
+app.component('Toast',Toast);
 app.use(VueAxios, axios) // 👈
 app.mount('#app')

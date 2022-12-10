@@ -7,8 +7,8 @@
     width: 100%;
     position: absolute;
     top: 0;
-    background-color: rgba(36, 14, 14, 0.3);
-    z-index: 5;
+    background-color: rgb(16 15 15 / 30%);
+    z-index: 10;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -91,77 +91,64 @@
 .wrapForm--data .top--item label {
     font-family: Regular;
 }
-.wrapForm--data .wrapForm--data__main {
+.wrapForm--data .wrapForm--data__main .wrap--main {
     display: flex;
-    /* align-items: center; */
-    flex: 1;
+ 
+}
+.wrapForm--data .wrapForm--data__main .wrap--main .main--left {
+    width: 50%;
+}
+.wrapForm--data .wrapForm--data__main .wrap--main .main--left .main--left__label label{
+    font-family: Regular;
+    margin-bottom: 8px;
+    display: inline-block;
     margin-top: 16px;
 }
-.wrapForm--data .wrapForm--data__main .main--left {
-    width: 50%;
-    padding-right: 12px;
-}
-
-.wrapForm--data .wrapForm--data__main .main--left .main--left__label {
-    margin-bottom: 12px;
-    position: relative;
-}
-.wrapForm--data .wrapForm--data__main .main--left .main--left__label label {
+.wrapForm--data .wrapForm--data__main .wrap--main .main--left .main--left__input .dropdown ul li{
     font-family: Regular;
 }
-
-.wrapForm--data .wrapForm--data__main .main--left .main--left__input
-input {
+.wrapForm--data .wrapForm--data__main .wrap--main .main--left .main--left__input .dropdown .select span{
     font-family: Regular;
 }
-.wrapForm--data .wrapForm--data__main .main--left .main--left__input .dropdown .select span {
+.wrapForm--data .wrapForm--data__main .wrap--main .main--left .main--left__input input {
     font-family: Regular;
 }
-.wrapForm--data .wrapForm--data__main .main--left .main--left__input .dropdown .dropdown-menu li{
-    font-family: Regular;
+.wrapForm--data .wrapForm--data__main .wrap--main .main--left .main--left__input input:hover {
+border: 1px solid #1a73e8;
 }
-.wrapForm--data .wrapForm--data__main .main--left .main--left__input input:hover {
-    border: 1px solid #1a73e8;
-}
-
-.wrapForm--data .wrapForm--data__main .main--left .main--left__input input:focus-visible {
+.wrapForm--data .wrapForm--data__main .wrap--main .main--left .main--left__input input:focus-visible{
     outline: none;
 }
-
-.wrapForm--data .wrapForm--data__main .main--right {
-    width: 50%;
-
-    position: relative;
+.wrapForm--data .wrapForm--data__main .wrap--main .main--right{
+    width:50%;
+    margin: 0px 10px;
 }
-.wrapForm--data .wrapForm--data__main .main--right .main--right__select {
-    display: flex;
-    align-items: center;
-    margin-bottom: 22px;
-}
-
-.wrapForm--data .wrapForm--data__main .main--right .main--right__select .select--left {
-    display: flex;
-    align-items: center;
-    width: 50%;
-}
-.wrapForm--data .wrapForm--data__main .main--right .main--right__select label {
+.wrapForm--data .wrapForm--data__main .wrap--main .main--right label{
     font-family: Regular;
+    display: inline-block;
+    margin-top: 16px;
+    margin-bottom: 8px;
 }
-
-.wrapForm--data .wrapForm--data__main .main--right .main--right__select .select--right {
+.wrapForm--data .wrapForm--data__main .wrap--main .main--right .main--right__select{
+display: flex;
+align-items: center;
+height: 36px;
+}
+.wrapForm--data .wrapForm--data__main .wrap--main .main--right .main--right__select .select--left {
+    width: 50%;
     display: flex;
     align-items: center;
 }
-.wrapForm--data .wrapForm--data__main .main--right .main--right__label {
-    margin-bottom: 20px;
-
-    /* position: absolute; */
+.wrapForm--data .wrapForm--data__main .wrap--main .main--right .main--right__select label{
+    margin: 0;
 }
-.wrapForm--data .wrapForm--data__main .main--right .main--right__label label {
-    font-family: Regular;
+.wrapForm--data .wrapForm--data__main .wrap--main .main--right .main--right__select .select--right{
+    display: flex;
+    align-items: center;
 }
 .wrapForm--data .wrapForm--data__bottom .bottom--label {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    margin-top: 16px;
 }
 .wrapForm--data .wrapForm--data__bottom .bottom--label label {
     font-family: Regular;

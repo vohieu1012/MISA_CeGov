@@ -1,45 +1,91 @@
 <template>
   <div class="dialog">
     <form action="">
-    <div class="dialog--content">
+      <div class="dialog--content">
         <div class="content--title">
           <div class="content--title__para">
-           <span>Thông báo</span>
+            <span>Thông báo</span>
           </div>
-          <div class="content--title__icon bg" @click="this.$emit('closeDialog')">
-            
-          </div>
-      
+          <div
+            class="content--title__icon bg"
+            @click="this.$emit('closeDialog')"
+          ></div>
         </div>
+
         <div class="content--message">
-          <span class="content--message__normal">
-            Danh hiệu
-          </span>
-          <span class="content--message__fixed"> {{this.valueDialog.rewardName}} </span>
-          <span class="content--message__normal"> là dữ liệu trên hệ thống bạn không thể xoá</span>
+          <div class="noti--error" v-if="!isError">
+            <span class="content--message__normal">Mã danh hiệu </span>
+            <span class="content--message__fixed"> {{ this.errorMsg }}</span>
+            <span class="content--message__normal">
+              đã tồn tại trong danh sách.Xin vui lòng kiểm tra lại.
+            </span>
+          </div>
+          <div class="noti--delete" v-if="isError">
+            <span class="content--message__normal"> Danh hiệu </span>
+            <span class="content--message__fixed"> {{ this.valueDelete }}</span>
+            <span class="content--message__normal">
+              là dữ liệu trên hệ thống bạn không thể xoá.</span
+            >
+          </div>
         </div>
         <div class="content--btn">
-          <button class="btn" @click="this.$emit('closeDialog')" v-if="isFixed">Đóng</button>
-          <button class="btn"  @click="this.$emit('closeDialog')"  v-if="!isFixed">Không</button>
-          <button class="btn-danger" v-if="!isFixed" @click="deleteEmulation">Xoá danh hiệu</button>
+          <button class="btn" @click="this.$emit('closeDialog')" v-if="isFixed">
+            Đóng
+          </button>
+          <button
+            class="btn"
+            @click="this.$emit('closeDialog')"
+            v-if="isError"
+          >
+            Không
+          </button>
+          <button class="btn-danger" v-if="isError" @click="deleteEmulation">
+            Xoá danh hiệu
+          </button>
+          <button
+            class="btn-danger"
+            @click="this.$emit('closeDialog')"
+            v-if="!isError"
+          >
+            Đóng
+          </button>
         </div>
-    </div>
-  </form>
+      </div>
+    </form>
   </div>
 </template>
 <script>
 import axios from "axios";
-export default{
-  props:{
-    valueDialog:{}
+import { isProxy } from "vue";
+export default {
+  props: {
+    valueDialog: {},
+    errorValue: {},
   },
-  component:{
-
-  },
+  component: {},
   data() {
     return {
-      isFixed:false,
-    }
+      isError: false,
+      errorMsg: [],
+      valueDelete: [],
+    };
+  },
+  mounted() {
+    this.valueDelete = this.valueDialog.rewardName;
+    this.errorMsg = this.errorValue;
+  },
+  updated() {},
+  watch: {
+    valueDelete(newVal) {
+      if (typeof newVal !== "undefined") {
+        this.isError = true;
+      }
+    },
+    errorMsg(newVal) {
+      if (!isProxy(newVal)) {
+        this.isError = false;
+      }
+    },
   },
   methods: {
     /**
@@ -48,19 +94,21 @@ export default{
      */
     //Xoá danh hiệu thi đua
     deleteEmulation() {
-      var rewardId= this.valueDialog.rewardID;
+      var rewardId = this.valueDialog.rewardID;
       axios
         .delete(`http://localhost:5194/api/Rewards/${rewardId}`)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          var success = { success: "Xoá thành công" };
+          this.$emit("deleteSuccess", success);
+          this.$emit("closeDialog");
         })
         .catch((e) => {
           console.log(e);
         });
     },
   },
-}
+};
 </script>
 <style scoped>
-@import "../../css/layout/dialog.css"
+@import "../../css/layout/dialog.css";
 </style>

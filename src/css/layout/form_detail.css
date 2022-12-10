@@ -68,6 +68,7 @@ table tbody tr .manageOption {
     right: 12px;
     height: 46px;
     display: none;
+    z-index: 10;
    
 }
 table tbody tr:hover .manageOption{
@@ -140,6 +141,24 @@ align-items: center;
 .manageOption .more--form .more--form__delete{
     color: #ef5350;
 }
+thead tr th .select--multi {
+    background: transparent url("../../assets/svgimg/CeGo_Sprites.f3e906b1.svg");
+    background-position: -544px -144px;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 0px;
+}
+thead tr  .reward--sticky{
+position: sticky;
+left: 48px;
+z-index:6;
+background-color: #ffff;
+border-right: 0px;
+}
+thead tr  .reward--sticky div {
+    border-right: 1px solid #e0e1ef;
+}
 thead tr > th {
     position: sticky;
     z-index: 2;
@@ -167,6 +186,18 @@ tbody tr > :first-child {
     background-color: #ffff;
     left: 0;
 }
+tbody tr .reward--sticky{
+    position: sticky;
+    z-index: 5;
+    left: 48px;
+    background-color: #FFF;
+    margin-right: 10px;
+    border-right: 0px;
+}
+tbody tr .reward--sticky .reward--sticky__wrap{
+    border-right: 1px solid #e0e1ef;
+    font-family: Regular;
+}
 table tbody tr {
     white-space: nowrap;
     width: 50px;
@@ -186,6 +217,9 @@ table tbody tr td:first-child {
     border-bottom: 1px solid #e0e1ef;
 }
 table tbody tr:hover td:first-child {
+    background-color: #fbe9e7;
+}
+table tbody tr:hover .reward--sticky{
     background-color: #fbe9e7;
 }
 table tbody tr:hover {
@@ -222,7 +256,40 @@ th {
     border-bottom-right-radius: 8px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 .tableData .tableData--paging .tableData--paging__left {
     font-family: Regular;
+}
+.tableData .tableData--paging  .tableData--paging__right .paging--right__index{
+    display: flex;
+    align-items: center;
+}
+.tableData .tableData--paging  .tableData--paging__right .paging--right__index .index--para{
+    font-family: Regular;
+}
+.tableData .tableData--paging  .tableData--paging__right .paging--right__index .index--nunmber{
+    margin: 0px 16px;
+    width: 85px;
+   margin-bottom: 2px;
+}
+.tableData .tableData--paging  .tableData--paging__right .paging--right__index .index--nav {
+    display: flex;
+    
+}
+.tableData .tableData--paging  .tableData--paging__right .paging--right__index .index--nav .index--nav__move{
+    background-position: -240px 0px;
+    height: 24px;
+     width: 24px;
+     left: 8px;
+    
+    /* transform: scaleX(-1); */
+}
+.tableData .tableData--paging  .tableData--paging__right .paging--right__index .index--nav .index--nav__prev{
+    background-position: -240px 0px;
+     transform: scaleX(-1);
+     height: 24px;
+     width: 24px;
+     left: 8px;
+     margin: 0 8px ;
 }

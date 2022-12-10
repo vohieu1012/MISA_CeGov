@@ -11,8 +11,11 @@
     "axios": "^1.1.3",
     "core-js": "^3.8.3",
     "jquery": "^3.6.1",
+    "primeicons": "^6.0.1",
+    "primevue": "^3.20.0",
     "vue": "^3.2.13",
-    "vue-axios": "^3.5.2"
+    "vue-axios": "^3.5.2",
+    "vue-i18n": "^9.3.0-beta.10"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -35,7 +38,11 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "vue/multi-word-component-names": "off",
+      "no-console": 1,
+      "no-debugger": 1
+    }
   },
   "browserslist": [
     "> 1%",

@@ -54,6 +54,12 @@
     border: 1px solid #ef5350;
     padding: 0px 16px;
     border-radius: 4px;
-    margin-left: 12px;
     cursor: pointer;
+    margin-left: 16px;
+    min-height: 36px;
+    min-width: 80px;
+}
+.btn-danger:hover{
+    background: #e54340;
+
 }
